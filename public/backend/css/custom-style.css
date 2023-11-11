@@ -1,0 +1,27 @@
+/* Added by mak*/
+.card-header{
+  padding: 0.5rem 1rem;
+  background-color: rgb(247 247 247);
+}
+/* ERROR message colour in jquery form submit  */
+.error {
+  color: red;
+}
+.select2 {
+  width:100%!important;
+}
+.plusIcon{
+    color: green;
+    cursor: pointer;
+}
+.trashIcon {
+    color: red;
+    cursor: pointer;
+}
+.requiredAstrik{
+  color:red;
+}
+.form-check-input{
+  width: 20px;
+  height: 20px;
+}
