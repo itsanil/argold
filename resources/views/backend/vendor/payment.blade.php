@@ -3,7 +3,7 @@
 @include('backend.includes.datatablesCSS')
 @endsection
 @section('contentHeader')
-Branches
+Vendor Payment
 @endsection
 @section('contentButton')
 <a class="btn btn-success btn-sm modal-trigger" data-toggle="modal" data-target="#modal-add">Add New Payment</a>
