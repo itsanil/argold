@@ -71,6 +71,7 @@
             </p>
           </a>
           <ul class="nav nav-treeview"> -->
+            {{--
             @can('branch-add')
             <li class="nav-item">
               <a href="{{ route('branch.add') }}" class="nav-link {{ (request()->is('admin/branch*')) ? 'active' : '' }}">
@@ -103,14 +104,16 @@
               </a>
             </li>
             @endcan
+            --}}
             @can('user-view')
             <li class="nav-item">
-              <a href="{{ route('user.view') }}" class="nav-link {{ (request()->is('admin/user*')) ? 'active' : '' }}">
+              <a href="{{ route('vendor.view') }}" class="nav-link {{ (request()->is('admin/vendor*')) ? 'active' : '' }}">
                 <i class="fa fa-user nav-icon"></i>
-                <p>Users</p>
+                <p>Vendor</p>
               </a>
             </li>
             @endcan
+            {{--
             @can('client-view')
             <li class="nav-item">
               <a href="{{ route('client.view') }}" class="nav-link {{ (request()->is('admin/client*')) ? 'active' : '' }}">
@@ -119,6 +122,7 @@
               </a>
             </li>
             @endcan
+
           <!-- </ul> -->
         <!-- </li> -->
         <!-- FUNDS -->
@@ -136,7 +140,7 @@
           </a>
         </li>
         @endcan
-
+        
         <!-- EXPENSE -->
         @can('expense-view')
         <li class="nav-item {{ (request()->is('admin/expense*')) ? 'menu-is-opening menu-open' : '' }}
@@ -152,7 +156,7 @@
           </a>
         </li>
         @endcan
-
+        
         <!-- WITHDRAWAL -->
         @can('withdrawal-view')
         <li class="nav-item {{ (request()->is('admin/withdrawal*')) ? 'menu-is-opening menu-open' : '' }}
@@ -197,6 +201,7 @@
           </a>
         </li>
         @endcan
+        --}}
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

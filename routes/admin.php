@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\AdminRegisterController;
 use App\Http\Controllers\Auth\AdminResetPasswordController;
 use App\Http\Controllers\Auth\AdminForgotPasswordController;
 use App\Http\Controllers\backend\HomeController;
+use App\Http\Controllers\VendorController;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
@@ -70,16 +71,28 @@ Route::group(['middleware' => ['auth:admin']], function () {
         Route::get('/userView', 'ClientController@userView')->name('userView')->middleware(['can:user-dashboard']);
     });
 
-    /*BRANCH*/
-    Route::group(['as'=>'branch.','prefix'=>'branch', 'namespace'=>'backend'], function(){
-        // Route::get('/view', 'BranchController@view')->name('view');
-        Route::get('/add', 'BranchController@add')->name('add')->middleware(['can:branch-add']);
-        Route::post('/store', 'BranchController@store')->name('store')->middleware(['can:branch-add']);
-        Route::get('/edit/{id}', 'BranchController@edit')->name('edit')->middleware(['can:branch-update']);
-        Route::post('/update/{id}', 'BranchController@update')->name('update')->middleware(['can:branch-update']);
-        Route::get('/delete/{id}', 'BranchController@delete')->name('delete')->middleware(['can:branch-delete']);
+    /*Vendor*/
+    Route::group(['as'=>'vendor.','prefix'=>'vendor'], function(){
+        Route::get('/view', 'VendorController@index')->name('view');
+        Route::get('/add', 'VendorController@create')->name('add');
+        Route::post('/store', 'VendorController@store')->name('store');
+        Route::get('/edit/{id}', 'VendorController@edit')->name('edit');
+        Route::post('/update/{id}', 'VendorController@update')->name('update');
+        Route::get('/delete/{id}', 'VendorController@delete')->name('delete');
         Route::post('/addNewBank', 'BranchController@addNewBank')->name('addNewBank');
     });
+
+    Route::group(['as'=>'vendor-payment.','prefix'=>'vendor-payment'], function(){
+        Route::get('/view/{id}', 'VendorPaymentController@index')->name('view');
+        Route::get('/add', 'VendorPaymentController@create')->name('add');
+        Route::post('/store', 'VendorPaymentController@store')->name('store');
+        Route::get('/edit/{id}', 'VendorPaymentController@edit')->name('edit');
+        Route::post('/update/{id}', 'VendorPaymentController@update')->name('update');
+        Route::get('/delete/{id}', 'VendorPaymentController@delete')->name('delete');
+        Route::post('/addNewBank', 'BranchController@addNewBank')->name('addNewBank');
+    });
+
+    
 
     /*BANK*/
     Route::group(['as'=>'bank.','prefix'=>'bank', 'namespace'=>'backend'], function(){

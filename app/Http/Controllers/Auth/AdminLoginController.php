@@ -30,6 +30,8 @@ class AdminLoginController extends Controller
         ]);
 
         // Attempt to log the user in
+        // echo "<pre>"; print_r($request->all()); echo "</pre>"; die('anil');    
+        // if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
         if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password, 'status' => 1], $request->remember)) {
             return $this->redirectBasedOnUser();
         }

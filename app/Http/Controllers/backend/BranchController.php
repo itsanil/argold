@@ -10,6 +10,8 @@ use App\Models\BranchBankMap;
 use App\Models\BranchEmployeeMap;
 use App\Models\BranchBankBalanceLogs;
 use App\Models\Fund;
+use App\Models\Employee;
+use App\Models\Vendor;
 use Auth;
 use DB;
 use Exception;
@@ -18,15 +20,9 @@ class BranchController extends Controller
 {
     //---- Branch View ----//
     public function view(){
-        $banks = Bank::where('status',1)->get();
-        $branches = Branch::getMultiBranchData();
-        $branchId = Branch::checkMultiBranchUser();
-        $funds = Fund::with('bank')->where('status',1);
-        if($branchId){
-            $funds->where('branch_id', $branchId);
-        }
-        $funds = $funds->get();
-        return view('backend.branch.view', compact('branches','banks','funds'));
+        $employee = Employee::all();
+        $vendor = Vendor::all();
+        return view('backend.dashboard', compact('employee','vendor'));
     }
 
     //---- Branch Add ----//
