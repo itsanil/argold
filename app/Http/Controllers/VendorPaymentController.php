@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\VendorPayment;
+use App\Models\Vendor;
 use Illuminate\Http\Request;
 
 class VendorPaymentController extends Controller
@@ -14,8 +15,9 @@ class VendorPaymentController extends Controller
      */
     public function index($vendor_id)
     {
+        $vendor_data = Vendor::find($vendor_id);
         $data = VendorPayment::where('vendor_id',$vendor_id)->orderBy('date','DESC')->get();
-        return view('backend.vendor.payment',compact('data','vendor_id'));
+        return view('backend.vendor.payment',compact('data','vendor_id','vendor_data'));
     }
 
     /**
