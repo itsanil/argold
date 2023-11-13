@@ -27,7 +27,8 @@ class VendorPaymentController extends Controller
      */
     public function create()
     {
-        //
+        $vendors = Vendor::all();
+        return view('backend.vendor.payment-add',compact('vendors'));
     }
 
     /**

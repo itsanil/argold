@@ -107,7 +107,7 @@
             --}}
             @can('user-view')
             <li class="nav-item">
-              <a href="{{ route('vendor.view') }}" class="nav-link {{ (request()->is('admin/vendor*')) ? 'active' : '' }}">
+              <a href="{{ route('vendor.view') }}" class="nav-link {{ (request()->is('admin/vendor/*')) ? 'active' : '' }}">
                 <i class="fa fa-user nav-icon"></i>
                 <p>Vendor</p>
               </a>
@@ -140,23 +140,23 @@
           </a>
         </li>
         @endcan
-        
+        --}}
         <!-- EXPENSE -->
         @can('expense-view')
-        <li class="nav-item {{ (request()->is('admin/expense*')) ? 'menu-is-opening menu-open' : '' }}
+        <li class="nav-item {{ (request()->is('admin/vendor-payment*')) ? 'menu-is-opening menu-open' : '' }}
          ">
-          <a href="{{ route('expense.view') }}" class="nav-link 
-              {{ (request()->is('admin/expense*')) ? 'active' : '' }}
+          <a href="{{ route('vendor-payment.add') }}" class="nav-link 
+              {{ (request()->is('admin/vendor-payment*')) ? 'active' : '' }}
               
               ">
               <i class="nav-icon fas fa-dollar-sign" area-hidden="true"></i>
               <p>
-                Expenses
+                Vendor Payment
               </p>
           </a>
         </li>
         @endcan
-        
+        {{--
         <!-- WITHDRAWAL -->
         @can('withdrawal-view')
         <li class="nav-item {{ (request()->is('admin/withdrawal*')) ? 'menu-is-opening menu-open' : '' }}
