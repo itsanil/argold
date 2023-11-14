@@ -82,6 +82,15 @@ Route::group(['middleware' => ['auth:admin']], function () {
         Route::post('/addNewBank', 'BranchController@addNewBank')->name('addNewBank');
     });
 
+    Route::group(['as'=>'employee.','prefix'=>'employee'], function(){
+        Route::get('/view', 'EmployeeController@index')->name('view');
+        Route::get('/add', 'EmployeeController@create')->name('add');
+        Route::post('/store', 'EmployeeController@store')->name('store');
+        Route::get('/edit/{id}', 'EmployeeController@edit')->name('edit');
+        Route::post('/update/{id}', 'EmployeeController@update')->name('update');
+        Route::get('/delete/{id}', 'EmployeeController@delete')->name('delete');
+    });
+
     Route::group(['as'=>'vendor-payment.','prefix'=>'vendor-payment'], function(){
         Route::get('/view/{id}', 'VendorPaymentController@index')->name('view');
         Route::get('/add', 'VendorPaymentController@create')->name('add');
@@ -89,6 +98,16 @@ Route::group(['middleware' => ['auth:admin']], function () {
         Route::get('/edit/{id}', 'VendorPaymentController@edit')->name('edit');
         Route::post('/update/{id}', 'VendorPaymentController@update')->name('update');
         Route::get('/delete/{id}', 'VendorPaymentController@delete')->name('delete');
+        Route::post('/addNewBank', 'BranchController@addNewBank')->name('addNewBank');
+    });
+
+    Route::group(['as'=>'employee-salary.','prefix'=>'employee-salary'], function(){
+        Route::get('/view/{id}', 'EmployeeSalaryController@index')->name('view');
+        Route::get('/add', 'EmployeeSalaryController@create')->name('add');
+        Route::post('/store', 'EmployeeSalaryController@store')->name('store');
+        Route::get('/edit/{id}', 'EmployeeSalaryController@edit')->name('edit');
+        Route::post('/update/{id}', 'EmployeeSalaryController@update')->name('update');
+        Route::get('/delete/{id}', 'EmployeeSalaryController@delete')->name('delete');
         Route::post('/addNewBank', 'BranchController@addNewBank')->name('addNewBank');
     });
 
