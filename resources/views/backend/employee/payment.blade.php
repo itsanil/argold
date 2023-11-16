@@ -10,6 +10,22 @@ Vendor Salary for {{ $employee_data->name }}
 @endsection
 @section('content.wrapper')
 <!-- Main content -->
+<?php 
+$months = array(
+    1 => "January",
+    2 => "February",
+    3 => "March",
+    4 => "April",
+    5 => "May",
+    6 => "June",
+    7 => "July",
+    8 => "August",
+    9 => "September",
+    10 => "October",
+    11 => "November",
+    12 => "December"
+);
+ ?>
 <section class="content">
   <!-- Default box -->
   <div class="card">
@@ -29,8 +45,8 @@ Vendor Salary for {{ $employee_data->name }}
           <tbody>
             @foreach($data as $dat)
               <tr>
-                <td>{{ $dat->date }}</td>
-                <td>{{ $dat->Salary }}</td>
+                <td>{{ $dat->salary_month }} {{ $dat->salary_year }}</td>
+                <td>{{ $dat->final }}</td>
                 <td>
                  
                   <a class="btn btn-success btn-sm modal-trigger" data-toggle="modal" data-target="#modal-default{{$dat->id}}"><i class="fa fa-edit"></i></a>
@@ -97,13 +113,150 @@ Vendor Salary for {{ $employee_data->name }}
            </div>
            <div class="modal-body" >
               <div class="form-group row" >
-                  <div class="col-sm-6">
-                    <input type="date" class="form-control" name="date"  placeholder="Enter Date"  required>
-                 </div>
-                 <div class="col-sm-6">
-                    <input type="number" class="form-control" name="Salary" placeholder="Enter Amount" required >
-                   
-                 </div>
+                <div class="row">
+                    {{-- Salary --}}
+                    <div class="form-group col-md-6">
+                        {{ Form::label('salary', 'Salary:') }}
+                        {{ Form::text('salary', null, ['class' => 'form-control salary','id'=>'salary', 'required']) }}
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        {{ Form::label('salary_month', 'Salary Month:') }}
+                        {{ Form::select('salary_month', $months,null, ['class' => 'form-control', 'id'=>'salary_month','required']) }}
+                    </div>
+                
+                    {{-- Salary Year --}}
+                    <div class="form-group col-md-6">
+                        {{ Form::label('salary_year', 'Salary Year:') }}
+                        {{ Form::text('salary_year', date('Y'), ['class' => 'form-control','id'=>'salary_year', 'required','readonly']) }}
+                    </div>
+                
+                    {{-- Number of Days --}}
+                    <div class="form-group col-md-6">
+                        {{ Form::label('noofdays', 'Number of Days:') }}
+                        {{ Form::text('noofdays', date('t'), ['class' => 'form-control','id'=>'noofdays', 'required']) }}
+                    </div>
+
+                    {{-- Per Day Amount --}}
+                    <div class="form-group col-md-6">
+                        {{ Form::label('perdayamount', 'Per Day Amount:') }}
+                        {{ Form::text('perdayamount', null, ['class' => 'form-control','id'=>'perdayamount', 'required','readonly']) }}
+                    </div>
+                
+                    {{-- Absent --}}
+                    <div class="form-group col-md-6">
+                        {{ Form::label('absent', 'Absent:') }}
+                        {{ Form::text('absent', null, ['class' => 'form-control','id'=>'absent', 'required']) }}
+                    </div>
+
+                    {{-- Night --}}
+                    <div class="form-group col-md-6">
+                        {{ Form::label('night', 'Night:') }}
+                        {{ Form::text('night', null, ['class' => 'form-control','id'=>'night', 'required']) }}
+                    </div>
+                
+                    {{-- Holiday --}}
+                    <div class="form-group col-md-6">
+                        {{ Form::label('holiday', 'Holiday:') }}
+                        {{ Form::text('holiday', null, ['class' => 'form-control','id'=>'holiday', 'required']) }}
+                    </div>
+
+                    {{-- Net Earning --}}
+                    <div class="form-group col-md-6">
+                        {{ Form::label('netearning', 'Net Earning:') }}
+                        {{ Form::text('netearning', null, ['class' => 'form-control','id'=>'netearning', 'required']) }}
+                    </div>
+                
+                    {{-- Incentive --}}
+                    <div class="form-group col-md-6">
+                        {{ Form::label('insentive', 'Incentive:') }}
+                        {{ Form::text('insentive', null, ['class' => 'form-control','id'=>'insentive', 'required']) }}
+                    </div>
+
+                    {{-- PT (Professional Tax) --}}
+                    <div class="form-group col-md-6">
+                        {{ Form::label('pt', 'PT (Professional Tax):') }}
+                        {{ Form::text('pt', null, ['class' => 'form-control','id'=>'pt', 'required']) }}
+                    </div>
+                
+                    {{-- PF (Provident Fund) --}}
+                    <div class="form-group col-md-6">
+                        {{ Form::label('pf', 'PF (Provident Fund):') }}
+                        {{ Form::text('pf', null, ['class' => 'form-control','id'=>'pf', 'required']) }}
+                    </div>
+
+                    {{-- ESIC (Employee State Insurance Corporation) --}}
+                    <div class="form-group col-md-6">
+                        {{ Form::label('esic', 'ESIC') }}
+                        {{ Form::text('esic', null, ['class' => 'form-control','id'=>'esic', 'required']) }}
+                    </div>
+                
+                    {{-- TDS (Tax Deducted at Source) --}}
+                    <div class="form-group col-md-6">
+                        {{ Form::label('tds', 'TDS (Tax Deducted at Source):') }}
+                        {{ Form::text('tds', null, ['class' => 'form-control','id'=>'tds', 'required']) }}
+                    </div>
+
+                    {{-- Advance --}}
+                    <div class="form-group col-md-6">
+                        {{ Form::label('advance', 'Advance:') }}
+                        {{ Form::text('advance', null, ['class' => 'form-control','id'=>'advance', 'required']) }}
+                    </div>
+                
+                    {{-- Pending --}}
+                    <div class="form-group col-md-6">
+                        {{ Form::label('pending', 'Pending:') }}
+                        {{ Form::text('pending', null, ['class' => 'form-control','id'=>'pending', 'required']) }}
+                    </div>
+
+                    {{-- Final --}}
+                    <div class="form-group col-md-6">
+                        {{ Form::label('final', 'Final:') }}
+                        {{ Form::text('final', null, ['class' => 'form-control','id'=>'final', 'required']) }}
+                    </div>
+                
+                    <!-- {{-- Bank Amount --}}
+                    <div class="form-group col-md-6">
+                        {{ Form::label('bankamount', 'Bank Amount:') }}
+                        {{ Form::text('bankamount', null, ['class' => 'form-control', 'required']) }}
+                    </div> -->
+
+                   <!--  {{-- Remark --}}
+                    <div class="form-group col-md-6">
+                        {{ Form::label('remark', 'Remark:') }}
+                        {{ Form::textarea('remark',null, ['class' => 'form-control']) }}
+                    </div> -->
+                    {{-- Deduction --}}
+                    <div class="form-group col-md-6">
+                        {{ Form::label('deduction', 'Deduction:') }}
+                        {{ Form::text('deduction', null, ['class' => 'form-control','id'=>'deduction', 'required']) }}
+                    </div>
+<!-- 
+                    {{-- Incentive Remark --}}
+                    <div class="form-group col-md-12">
+                        {{ Form::label('incentive_remark', 'Incentive Remark:') }}
+                        {{ Form::textarea('incentive_remark',null, ['class' => 'form-control']) }}
+                    </div> -->
+                    {{-- Deduction Remark --}}
+                    <div class="form-group col-md-12">
+                        {{ Form::label('deduction_remark', 'Deduction Remark:') }}
+                        {{ Form::textarea('deduction_remark',null, ['class' => 'form-control','row'=>2]) }}
+                    </div>
+
+                    {{-- Salary Month --}}
+                    
+
+                    {{-- Pending Salary --}}
+                    <div class="form-group col-md-6">
+                        {{ Form::label('pending_salary', 'Pending Salary:') }}
+                        {{ Form::text('pending_salary', null, ['class' => 'form-control','id'=>'pending_salary', 'required']) }}
+                    </div>
+                    {{-- Status --}}
+                    <div class="form-group col-md-6">
+                        {{ Form::label('status', 'Status:') }}
+                        {{ Form::select('status', ['1' => 'Active', '0' => 'Inactive'], null, ['class' => 'form-control', 'required']) }}
+                    </div>
+                </div>
               </div>
            </div>
            <div class="modal-footer justify-content-between">

@@ -105,6 +105,12 @@
             </li>
             @endcan
             --}}
+            <li class="nav-item">
+              <a href="{{ route('employee.view') }}" class="nav-link {{ (request()->is('admin/employee/*')) ? 'active' : '' }}">
+                <i class="fa fa-user nav-icon"></i>
+                <p>Employee</p>
+              </a>
+            </li>
             @can('user-view')
             <li class="nav-item">
               <a href="{{ route('vendor.view') }}" class="nav-link {{ (request()->is('admin/vendor/*')) ? 'active' : '' }}">
