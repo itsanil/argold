@@ -189,6 +189,10 @@ function save(id)
       "info": true,
       "autoWidth": false,
       "responsive": true,
+      dom: 'Bfrtip',
+      buttons: [
+          'excel'
+      ]
         // dom: '<"container-fluid"<"row"<"col"B><"col"l><"col"f>>>'
         //    +'<"row"<"col-sm-12"tr>>' +
         //    '<"row"<"col-sm-4"i><"col-sm-8"p>>',
