@@ -12,4 +12,8 @@ class VendorPayment extends Model
 
 protected $fillable = ['vendor_id','payment','date'
     ];
+
+    public function getVendor(){
+          return $this->belongsTo(Vendor::class,'vendor_id','id');
+     }
 }
